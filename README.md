@@ -1,2 +1,2 @@
 # arushmitra.github.io-
-JavaScript School Demos 
+CS 30 JavaScript School Demos 
