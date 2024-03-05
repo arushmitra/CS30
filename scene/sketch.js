@@ -1,10 +1,6 @@
-// Project Title
-// Your Name
-// Date
-//
+// Project Title // Your Name // Date //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-
 
 let rectX = 0;
 let rectY;
@@ -18,6 +14,13 @@ let radius = 15;
 let r = 0;
 let g = 0;
 let b = 0;
+let img;
+let someTime = 0;
+let lastSwitch = 0;
+
+function preload() {
+  img = loadImage("img.jpeg");
+}
 
 function drawRect() {
   fill("brown");
@@ -26,10 +29,10 @@ function drawRect() {
 
 function moveRect() {
   if (keyIsDown(39) && rectX + rectWidth < windowWidth) {
-    rectX += 7.5;
+    rectX += 20;
   }
   if (keyIsDown(37) && rectX > 0) {
-    rectX -= 7.5;
+    rectX -= 20;
   }
 }
 
@@ -39,36 +42,24 @@ function drawCircle() {
 }
 
 function moveCircle() {
+  // move circle
   circleX += circleDX;
   circleY += circleDY;
 }
 
 function bounceWall() {
-  function bounceWall() {
-  // Check if the circle hits the left or right wall
-  if (circleX + radius >= windowWidth || circleX - radius <= 0) {
+  if (circleX + radius >= width || circleX - radius <= 0) {
     circleDX = -1 * circleDX;
     changeColor();
   }
-
-  // Check if the circle hits the top or bottom wall
-  if (circleY + radius >= windowHeight || circleY - radius <= 0) {
+  if (circleY - radius <= 0) {
     circleDY = -1 * circleDY;
     changeColor();
   }
-
-  // Check if the circle hits the surface of the rectangle
-  if (
-    circleY + radius >= rectY &&
-    circleY - radius <= rectY + rectHeight &&
-    circleX >= rectX &&
-    circleX <= rectX + rectWidth
-  ) {
+  if (circleX + radius >= rectX &&circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight &&circleDY > 0) {
     circleDY = -1 * circleDY;
     changeColor();
   }
-}
-
 }
 
 function changeColor() {
@@ -76,14 +67,22 @@ function changeColor() {
   g = random(0, 255);
   b = random(0, 255);
 }
-
-
+function keyTyped() {
+  // C
+  if (key === "c"){
+  drawCircle();
+  moveCircle();
+  bounceWall();
+  }
+}
 function setup() {
+  someTime = 2000;
   rectY = windowHeight - 30;
   circleX = width / 2;
   circleY = height / 2;
   circleDX = random(5, 15);
   circleDY = random(5, 15);
+
   createCanvas(windowWidth, windowHeight);
   noStroke();
   changeColor();
@@ -91,12 +90,14 @@ function setup() {
 
 function draw() {
   background(0);
-  drawRect();
-  moveRect();
-  if (keyIsDown(67)){//C
-    drawCircle();
-    moveCircle();
-    bounceWall();
-   
+  image(img, rectWidth / 2, rectHeight / 2);
+  if (millis() > lastSwitch + someTime) {
+    background(0);
+    drawRect();
+    moveRect();
   }
+  keyTyped();
+
+
+  
 }
