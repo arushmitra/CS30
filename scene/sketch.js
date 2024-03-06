@@ -1,7 +1,3 @@
-// Project Title // Your Name // Date //
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-
 let rectX = 0;
 let rectY;
 let rectWidth = 250;
@@ -14,13 +10,33 @@ let radius = 15;
 let r = 0;
 let g = 0;
 let b = 0;
-let img;
 let someTime = 0;
 let lastSwitch = 0;
-let counter = 0;
+let state = "open";
 
-function preload() {
-  img = loadImage("img.jpeg");
+function draw() {
+  background(0);
+  fill("green");
+  textSize(45);
+  textAlign(CENTER, CENTER);
+  text("Click the mouse to start the ball",width/2, height/2);
+
+  if (millis() > lastSwitch + someTime) {
+    background(0);
+    drawRect();
+    moveRect();
+  }
+  mousePressed();
+}
+function mousePressed() {
+  if (mouseIsPressed === true) {
+    state = "mouse";
+  }
+  if (state === "mouse"){
+  drawCircle();
+  moveCircle();
+  bounceWall();
+  }
 }
 
 function drawRect() {
@@ -57,7 +73,13 @@ function bounceWall() {
     circleDY = -1 * circleDY;
     changeColor();
   }
-  if (circleX + radius >= rectX &&circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight &&circleDY > 0) {
+  if (
+    circleX + radius >= rectX &&
+    circleX - radius <= rectX + rectWidth &&
+    circleY + radius >= rectY &&
+    circleY - radius <= rectY + rectHeight &&
+    circleDY > 0
+  ) {
     circleDY = -1 * circleDY;
     changeColor();
   }
@@ -68,14 +90,7 @@ function changeColor() {
   g = random(0, 255);
   b = random(0, 255);
 }
-function keyTyped() {
-  // C
-  if (key === "c"){
-  drawCircle();
-  moveCircle();
-  bounceWall();
-  }
-}
+
 function setup() {
   someTime = 2000;
   rectY = windowHeight - 30;
@@ -83,22 +98,8 @@ function setup() {
   circleY = height / 2;
   circleDX = random(5, 15);
   circleDY = random(5, 15);
-
   createCanvas(windowWidth, windowHeight);
   noStroke();
   changeColor();
 }
 
-function draw() {
-  background(0);
-  image(img, rectWidth / 2, rectHeight / 2);
-  
-  setInterval(keyTyped()  , 1000);
-  if (millis() > lastSwitch + someTime) {
-    background(0);
-    drawRect();
-    moveRect();
-  }
-  
-
-}
