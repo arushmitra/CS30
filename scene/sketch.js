@@ -17,6 +17,7 @@ let b = 0;
 let img;
 let someTime = 0;
 let lastSwitch = 0;
+let counter = 0;
 
 function preload() {
   img = loadImage("img.jpeg");
@@ -91,13 +92,13 @@ function setup() {
 function draw() {
   background(0);
   image(img, rectWidth / 2, rectHeight / 2);
+  
+  setInterval(keyTyped()  , 1000);
   if (millis() > lastSwitch + someTime) {
     background(0);
     drawRect();
     moveRect();
   }
-  keyTyped();
-
-
   
+
 }
