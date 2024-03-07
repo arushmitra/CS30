@@ -10,19 +10,21 @@ let radius = 15;
 let r = 0;
 let g = 0;
 let b = 0;
+let bg;
 let someTime = 0;
 let lastSwitch = 0;
-let state = "open";
+let state;
 
 function draw() {
-  background(0);
+  state = "play";
+  background(bg);
   fill("green");
   textSize(45);
   textAlign(CENTER, CENTER);
   text("Click the mouse to start the ball",width/2, height/2);
 
   if (millis() > lastSwitch + someTime) {
-    background(0);
+    background(bg);
     drawRect();
     moveRect();
   }
@@ -40,7 +42,7 @@ function mousePressed() {
 }
 
 function drawRect() {
-  fill("brown");
+  fill("green");
   rect(rectX, rectY, rectWidth, rectHeight);
 }
 
@@ -83,6 +85,15 @@ function bounceWall() {
     circleDY = -1 * circleDY;
     changeColor();
   }
+  else if(circleY + radius > windowHeight) {
+    state = "end game";
+    noLoop();
+    fill("green");
+    textSize(45);
+    textAlign(CENTER, CENTER);
+    text("Uh-oh you lose! To play again, please press Enter",width/2, height/2);
+    
+  }
 }
 
 function changeColor() {
@@ -92,6 +103,7 @@ function changeColor() {
 }
 
 function setup() {
+  bg = loadImage("bg.jpeg");
   someTime = 2000;
   rectY = windowHeight - 30;
   circleX = width / 2;
