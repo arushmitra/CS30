@@ -14,14 +14,15 @@ let bg;
 let someTime = 0;
 let lastSwitch = 0;
 let state;
+let loseTextTime = 0;
+let showLoseText = false;
 
 function draw() {
-  state = "play";
   background(bg);
   fill("green");
   textSize(45);
   textAlign(CENTER, CENTER);
-  text("Click the mouse to start the ball",width/2, height/2);
+  text("Click the mouse to start the ball", width / 2, height / 2);
 
   if (millis() > lastSwitch + someTime) {
     background(bg);
@@ -29,15 +30,19 @@ function draw() {
     moveRect();
   }
   mousePressed();
+  if (showLoseText) {
+    displayLoseText();
+  }
 }
+
 function mousePressed() {
   if (mouseIsPressed === true) {
     state = "mouse";
   }
-  if (state === "mouse"){
-  drawCircle();
-  moveCircle();
-  bounceWall();
+  if (state === "mouse") {
+    drawCircle();
+    moveCircle();
+    bounceWall();
   }
 }
 
@@ -84,16 +89,34 @@ function bounceWall() {
   ) {
     circleDY = -1 * circleDY;
     changeColor();
+  } else if (circleY + radius > windowHeight) {
+    if (!showLoseText) {
+      loseTextTime = millis() + 2000; // Display for 2 seconds
+      showLoseText = true;
+    }
   }
-  else if(circleY + radius > windowHeight) {
-    state = "end game";
-    noLoop();
+}
+
+function displayLoseText() {
+  if (millis() < loseTextTime) {
+    background(bg);
     fill("green");
     textSize(45);
     textAlign(CENTER, CENTER);
-    text("Uh-oh you lose! To play again, please press Enter",width/2, height/2);
-    
+    text("Uh-oh you lose!", width / 2, height / 2);
+  } else {
+    showLoseText = false;
+    restartGame();
   }
+}
+
+function restartGame() {
+  circleX = width / 2;
+  circleY = height / 2;
+  circleDX = random(5, 15);
+  circleDY = random(5, 15);
+  state = "play";
+  loop();
 }
 
 function changeColor() {
@@ -114,4 +137,3 @@ function setup() {
   noStroke();
   changeColor();
 }
-
