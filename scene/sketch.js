@@ -16,13 +16,16 @@ let lastSwitch = 0;
 let state;
 let loseTextTime = 0;
 let showLoseText = false;
+let pointCounter = 0;
 
 function draw() {
   background(bg);
   fill("green");
   textSize(45);
   textAlign(CENTER, CENTER);
-  text("Click the mouse to start the ball", width / 2, height / 2);
+  text("Click the mouse to start the ball when game starts", width / 2, height / 2);
+  
+
 
   if (millis() > lastSwitch + someTime) {
     background(bg);
@@ -48,7 +51,12 @@ function mousePressed() {
 
 function drawRect() {
   fill("green");
+  textSize(40);
+  textAlign(0,0);
+  text("Score: " + pointCounter, width / 2, height / 2);  
+  fill("green");
   rect(rectX, rectY, rectWidth, rectHeight);
+  
 }
 
 function moveRect() {
@@ -66,7 +74,6 @@ function drawCircle() {
 }
 
 function moveCircle() {
-  // move circle
   circleX += circleDX;
   circleY += circleDY;
 }
@@ -80,18 +87,14 @@ function bounceWall() {
     circleDY = -1 * circleDY;
     changeColor();
   }
-  if (
-    circleX + radius >= rectX &&
-    circleX - radius <= rectX + rectWidth &&
-    circleY + radius >= rectY &&
-    circleY - radius <= rectY + rectHeight &&
-    circleDY > 0
-  ) {
+  if (circleX + radius >= rectX && circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight && circleDY > 0)
+  {
     circleDY = -1 * circleDY;
     changeColor();
+    pointCounter ++; 
   } else if (circleY + radius > windowHeight) {
     if (!showLoseText) {
-      loseTextTime = millis() + 2000; // Display for 2 seconds
+      loseTextTime = millis() + 2000; 
       showLoseText = true;
     }
   }
@@ -103,7 +106,7 @@ function displayLoseText() {
     fill("green");
     textSize(45);
     textAlign(CENTER, CENTER);
-    text("Uh-oh you lose!", width / 2, height / 2);
+    text("Uh-oh you lose! Click mouse to replay when you see the rectangle again!", width / 2, height / 2);
   } else {
     showLoseText = false;
     restartGame();
@@ -111,6 +114,10 @@ function displayLoseText() {
 }
 
 function restartGame() {
+  let scoreChecker = pointCounter;
+  pointCounter = 0;
+   
+  
   circleX = width / 2;
   circleY = height / 2;
   circleDX = random(5, 15);
