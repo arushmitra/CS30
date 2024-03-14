@@ -2,6 +2,7 @@
 
 ## Demos 
 -[Traffic Light](trafficlight)
+-[Arrays and Object](circles)
 
 ## Projects 
 - [Interactive Scene](scene)
