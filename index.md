@@ -2,8 +2,9 @@
 
 ## Demos 
 -[Traffic Light](trafficlight)
--[Arrays and Object](circles)
+- [Arrays and Object](circles)
+- [Generative Art](art)
+
 
 ## Projects 
 - [Interactive Scene](scene)
-
