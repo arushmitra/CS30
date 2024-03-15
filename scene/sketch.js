@@ -1,7 +1,3 @@
-// Project Title // Your Name // Date //
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-
 let rectX = 0;
 let rectY;
 let rectWidth = 250;
@@ -14,18 +10,53 @@ let radius = 15;
 let r = 0;
 let g = 0;
 let b = 0;
-let img;
+let bg;
 let someTime = 0;
 let lastSwitch = 0;
-let counter = 0;
+let state;
+let loseTextTime = 0;
+let showLoseText = false;
+let pointCounter = 0;
 
-function preload() {
-  img = loadImage("img.jpeg");
+function draw() {
+  background(bg);
+  fill("blue");
+  textSize(45);
+  textAlign(CENTER, CENTER);
+  text("Click the mouse to start the ball when game starts", width / 2, height / 2);
+  
+
+
+  if (millis() > lastSwitch + someTime) {
+    background(bg);
+    drawRect();
+    moveRect();
+  }
+  mousePressed();
+  if (showLoseText) {
+    displayLoseText();
+  }
+}
+
+function mousePressed() {
+  if (mouseIsPressed === true) {
+    state = "mouse";
+  }
+  if (state === "mouse") {
+    drawCircle();
+    moveCircle();
+    bounceWall();
+  }
 }
 
 function drawRect() {
-  fill("brown");
+  fill("blue");
+  textSize(40);
+  textAlign(0,0);
+  text("Score: " + pointCounter, width / 2, height / 2);  
+  fill("blue");
   rect(rectX, rectY, rectWidth, rectHeight);
+  
 }
 
 function moveRect() {
@@ -43,7 +74,6 @@ function drawCircle() {
 }
 
 function moveCircle() {
-  // move circle
   circleX += circleDX;
   circleY += circleDY;
 }
@@ -57,10 +87,43 @@ function bounceWall() {
     circleDY = -1 * circleDY;
     changeColor();
   }
-  if (circleX + radius >= rectX &&circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight &&circleDY > 0) {
+  if (circleX + radius >= rectX && circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight && circleDY > 0)
+  {
     circleDY = -1 * circleDY;
     changeColor();
+    pointCounter ++; 
+  } else if (circleY + radius > windowHeight) {
+    if (!showLoseText) {
+      loseTextTime = millis() + 2000; 
+      showLoseText = true;
+    }
   }
+}
+
+function displayLoseText() {
+  if (millis() < loseTextTime) {
+    background(bg);
+    fill("blue");
+    textSize(45);
+    textAlign(CENTER, CENTER);
+    text("Uh-oh you lose! Click mouse to replay when you see the rectangle again!", width / 2, height / 2);
+  } else {
+    showLoseText = false;
+    restartGame();
+  }
+}
+
+function restartGame() {
+  let scoreChecker = pointCounter;
+  pointCounter = 0;
+   
+  
+  circleX = width / 2;
+  circleY = height / 2;
+  circleDX = random(5, 15);
+  circleDY = random(5, 15);
+  state = "play";
+  loop();
 }
 
 function changeColor() {
@@ -68,36 +131,16 @@ function changeColor() {
   g = random(0, 255);
   b = random(0, 255);
 }
-function keyTyped() {
-  // C
-  if (key === "c"){
-    drawCircle();
-    moveCircle();
-    bounceWall();
-  }
-}
+
 function setup() {
+  bg = loadImage("bg.jpeg");
   someTime = 2000;
   rectY = windowHeight - 30;
   circleX = width / 2;
   circleY = height / 2;
   circleDX = random(5, 15);
   circleDY = random(5, 15);
-
   createCanvas(windowWidth, windowHeight);
   noStroke();
   changeColor();
-}
-
-function draw() {
-  background(0);
-  image(img, rectWidth / 2, rectHeight / 2);
-  
-  if (millis() > lastSwitch + someTime) {
-    background(0);
-    drawRect();
-    moveRect();
-  }
-  
-
 }
