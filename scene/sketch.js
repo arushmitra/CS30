@@ -87,12 +87,12 @@ function bounceWall() {
     circleDY = -1 * circleDY;
     changeColor();
   }
-  if (circleX + radius >= rectX && circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight && circleDY > 0)
-  {
+  if (circleX + radius >= rectX && circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight && circleDY > 0){
     circleDY = -1 * circleDY;
     changeColor();
     pointCounter ++; 
-  } else if (circleY + radius > windowHeight) {
+  } 
+  else if (circleY + radius > windowHeight) {
     if (!showLoseText) {
       loseTextTime = millis() + 2000; 
       showLoseText = true;
@@ -107,7 +107,8 @@ function displayLoseText() {
     textSize(45);
     textAlign(CENTER, CENTER);
     text("Uh-oh you lose! Click mouse to replay when you see the rectangle again!", width / 2, height / 2);
-  } else {
+  } 
+  else {
     showLoseText = false;
     restartGame();
   }
