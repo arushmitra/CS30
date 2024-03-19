@@ -90,15 +90,9 @@ function bounceWall() {
   if (circleX + radius >= rectX && circleX - radius <= rectX + rectWidth && circleY + radius >= rectY && circleY - radius <= rectY + rectHeight && circleDY > 0){
     circleDY = -1 * circleDY;
     changeColor();
-<<<<<<< Updated upstream
     pointCounter ++; 
   } 
   else if (circleY + radius > windowHeight) {
-=======
-    pointCounter ++;
-   }
-     else if (circleY + radius > windowHeight) {
->>>>>>> Stashed changes
     if (!showLoseText) {
       loseTextTime = millis() + 2000; 
       showLoseText = true;
