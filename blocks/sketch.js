@@ -1,8 +1,21 @@
+// Arush Mitra
 // Arrays and Object Notation Assignment
 // Blocks In The World!  
 
+// Tip: 
+// Please use your mouse wheel to zoom in and out
 
 
+// Constants 
+const minNumberOfCubes = 200;
+const maxNumberOfCubes = 6000;
+const minCubeOrientation = 1;
+const maxCubeOrientation = 10;
+const minCubeSize = 50;
+const maxCubeSize = 100;
+
+
+// Setting Variables
 let theCubes = [];
 let numberOfCubesSlider;
 let cubeOrientationSlider;
@@ -10,16 +23,17 @@ let n = 1;
 let cubeMaker = 0;
 
 function setup() {
+  // WEBGL used to make and compile program in 3D 
   createCanvas(windowWidth, windowHeight, WEBGL);
   
   // Slider for the number of cubes
-  numberOfCubesSlider = createSlider(200, 6000, 100);
+  numberOfCubesSlider = createSlider(minNumberOfCubes, maxNumberOfCubes, 100);
   numberOfCubesSlider.position(10, 10);
   numberOfCubesSlider.size(180);
   numberOfCubesSlider.input(checkAndMakeNewCubes);
   
   // Slider for cube orientation
-  cubeOrientationSlider = createSlider(1, 10, 1);
+  cubeOrientationSlider = createSlider(minCubeOrientation, maxCubeOrientation, 1);
   cubeOrientationSlider.position(10, windowHeight - 30);
   cubeOrientationSlider.size(180);
   cubeOrientationSlider.input(updateCubeOrientation);
@@ -27,6 +41,7 @@ function setup() {
   checkAndMakeNewCubes();
 }
 
+// Makes new cubes and adds to array 
 function checkAndMakeNewCubes() {
   theCubes = [];
   let spawner = numberOfCubesSlider.value();
@@ -41,17 +56,20 @@ function checkAndMakeNewCubes() {
   }
 }
 
+// Updates the orientation of the cubes on the screen
 function updateCubeOrientation() {
   n = cubeOrientationSlider.value();
   checkAndMakeNewCubes();
 }
 
+// Orbit control used to pan cubes in screen 
 function draw() {
   background("black");
   orbitControl();
   displayCubes();
 }
 
+// Random color generator for cubes 
 function cubeColors() {
   let r, g, b;
   let chooser = random(0, 40);
@@ -72,21 +90,22 @@ function cubeColors() {
     g = 115;
     b = 87;
   }
-
   return { r, g, b };
 }
 
+// Specific cube parame†er defining function
 function makeCube(x, y, z) {
   let someCube = {
-    Width: random(50, 100),
-    Height: random(50, 100),
-    Depth: random(50, 100),
+    Width: random(minCubeSize, maxCubeSize),
+    Height: random(minCubeSize, maxCubeSize),
+    Depth: random(minCubeSize, maxCubeSize),
     Color: cubeColors(),
     Position: createVector(x, y, z),
   };
   theCubes.push(someCube);
 }
 
+// Shows all the cubes in the parameters defined above 
 function displayCubes() {
   for (let cube of theCubes) {
     push();
