@@ -7,12 +7,12 @@
 
 
 // Constants 
-const minNumberOfCubes = 200;
-const maxNumberOfCubes = 6000;
-const minCubeOrientation = 1;
-const maxCubeOrientation = 10;
-const minCubeSize = 50;
-const maxCubeSize = 100;
+const MINNUMBEROFCUBES = 200;
+const MAXNUMBEROFCUBES = 6000;
+const MINCUBEORIENTATION = 1;
+const MAXCUBEORIENTATION = 10;
+const MINCUBESIZE = 50;
+const MAXCUBESIZE = 100;
 
 
 // Setting Variables
@@ -27,13 +27,13 @@ function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   
   // Slider for the number of cubes
-  numberOfCubesSlider = createSlider(minNumberOfCubes, maxNumberOfCubes, 100);
+  numberOfCubesSlider = createSlider(MINNUMBEROFCUBES, MAXNUMBEROFCUBES, 100);
   numberOfCubesSlider.position(10, 10);
   numberOfCubesSlider.size(180);
   numberOfCubesSlider.input(checkAndMakeNewCubes);
   
   // Slider for cube orientation
-  cubeOrientationSlider = createSlider(minCubeOrientation, maxCubeOrientation, 1);
+  cubeOrientationSlider = createSlider(MINCUBEORIENTATION, MAXCUBEORIENTATION, 1);
   cubeOrientationSlider.position(10, windowHeight - 30);
   cubeOrientationSlider.size(180);
   cubeOrientationSlider.input(updateCubeOrientation);
@@ -96,9 +96,9 @@ function cubeColors() {
 // Specific cube parame†er defining function
 function makeCube(x, y, z) {
   let someCube = {
-    Width: random(minCubeSize, maxCubeSize),
-    Height: random(minCubeSize, maxCubeSize),
-    Depth: random(minCubeSize, maxCubeSize),
+    Width: random(MINCUBESIZE, MAXCUBESIZE),
+    Height: random(MINCUBESIZE, MAXCUBESIZE),
+    Depth: random(MINCUBESIZE, MAXCUBESIZE),
     Color: cubeColors(),
     Position: createVector(x, y, z),
   };
