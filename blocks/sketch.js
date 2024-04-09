@@ -64,7 +64,7 @@ function updateCubeOrientation() {
 
 // Orbit control used to pan cubes in screen 
 function draw() {
-  background("black");
+  background(25,25,25);
   orbitControl();
   displayCubes();
 }
