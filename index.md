@@ -8,7 +8,6 @@
 - [Bubble movement](bubble)
 - [2D Grid](grid)
 
-
 ## Projects 
 - [Interactive Scene](scene)
 - [Arrays and Object Notation Assignment](blocks)
