@@ -15,3 +15,4 @@
 ## Projects 
 - [Interactive Scene](scene)
 - [Arrays and Object Notation Assignment](blocks)
+- [Grid Based Game][grid-game]
