@@ -14,10 +14,16 @@ let player = {
 };
 let grassImg;
 let pavingImg;
+let bgMusic;
+let cantWalk;
+let state = "start screen";
+
 
 function preload() {
   grassImg = loadImage("clover 1.png");
   pavingImg = loadImage("paving 3.png");
+  bgMusic = loadSound("TownTheme.mp3");
+  cantWalk = loadSound("lose music 3 - 1_0.wav");
 }
 
 
@@ -53,8 +59,13 @@ function windowResized() {
 }
 
 function draw() {
-  background(220);
-  displayGrid();
+  if(state === "start screen"){
+    background("black");
+  }
+  else if (state === "game"){
+    background(220);
+    displayGrid();
+  }
 }
 
 function keyPressed() {
@@ -81,25 +92,32 @@ function keyPressed() {
   if (key === "a") {   //left
     movePlayer(player.x - 1, player.y + 0); //-1 on x axis, 0 on y axis
   }
+  if (key === " " && state === "start screen"){
+    state = "game";
+    bgMusic.loop();
+  }
 }
 
 function movePlayer(x, y) {
   //don't move off the grid, and only move into open tiles
   if (x < GRID_SIZE && y < GRID_SIZE &&
       x >= 0 && y >= 0 && grid[y][x] === OPEN_TILE) {
-      //previous player location
-      let oldX = player.x;
-      let oldY = player.y;
+    //previous player location
+    let oldX = player.x;
+    let oldY = player.y;
 
-      //move the player
-      player.x = x;
-      player.y = y;
+    //move the player
+    player.x = x;
+    player.y = y;
 
-      //reset old location to be an empty tile
-      grid[oldY][oldX] = OPEN_TILE;
+    //reset old location to be an empty tile
+    grid[oldY][oldX] = OPEN_TILE;
 
-      //move the player to the new spot
-      grid[player.y][player.x] = PLAYER;
+    //move the player to the new spot
+    grid[player.y][player.x] = PLAYER;
+  }
+  else{
+    cantWalk.loop()
   }
 }
 
