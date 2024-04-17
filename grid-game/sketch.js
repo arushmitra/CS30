@@ -1,10 +1,8 @@
-// Character in 2D Grid
-// Dan Schellenberg
-// Apr 15, 2024
+// Impossible Mission 1984
 
 let grid;
 let cellSize;
-const GRID_SIZE = 10;
+const GRID_SIZE = 40;
 const PLAYER = 9;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
@@ -37,7 +35,7 @@ function setup() {
   }
 
   //if randomizing the grid, do this:
-  grid = generateRandomGrid(GRID_SIZE, GRID_SIZE);
+  grid = generateRandomGrid(GRID_SIZE, GRID_SIZE );
   
   //this is dumb -- should check if this is the right size!
   cellSize = height/grid.length;
