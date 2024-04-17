@@ -15,10 +15,14 @@
 
 let grid;
 let cellSize;
-const GRID_SIZE = 30;
+const GRID_SIZE = 50;
 let toggleStyle = "self";
 let isAutoPlayOn = false;
+let gosperGun;
 
+function preload(){
+  gosperGun = loadJSON("gosper.json");
+}
 function setup() {
   //make the canvas the largest square that you can...
   if (windowWidth < windowHeight) {
@@ -80,6 +84,9 @@ function keyPressed() {
 
   if (key === "a") {
     isAutoPlayOn = !isAutoPlayOn;
+  }
+  if (key === "g"){
+    grid = gosperGun.gun;
   }
 }
 
