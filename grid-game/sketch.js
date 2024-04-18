@@ -14,6 +14,7 @@ let grassImg;
 let pavingImg;
 let bgMusic;
 let cantWalk;
+let heroSprite; 
 let state = "start screen";
 
 
@@ -22,6 +23,7 @@ function preload() {
   pavingImg = loadImage("paving 3.png");
   bgMusic = loadSound("TownTheme.mp3");
   cantWalk = loadSound("lose music 3 - 1_0.wav");
+  heroSprite = loadImage("hero.png")
 }
 
 
@@ -152,13 +154,13 @@ function displayGrid() {
         // fill("white");
         image(pavingImg, x * cellSize, y * cellSize, cellSize);
       }
-      else if (grid[y][x] === PLAYER) {
-        fill("red");
-        square(x * cellSize, y * cellSize, cellSize);
+      if (grid[y][x] === PLAYER) {
+        image(heroSprite,x* cellSize, y*cellSize,cellSize);
       }
     }
   }
 }
+
 
 function generateRandomGrid(cols, rows) {
   let emptyArray = [];
