@@ -2,14 +2,19 @@
 
 let grid;
 let cellSize;
-const GRID_SIZE = 40;
+let GRID_SIZE = 27;
 const PLAYER = 9;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
+const GOAL = 2;
 let player = {
   x: 0,
   y: 0,
 };
+let goal = {
+  x:, 
+  y:
+}
 let grassImg;
 let pavingImg;
 let bgMusic;
@@ -44,6 +49,7 @@ function setup() {
 
   //add player to the grid
   grid[player.y][player.x] = PLAYER;
+  grid []
 }
 
 function windowResized() {
@@ -155,7 +161,11 @@ function displayGrid() {
         image(pavingImg, x * cellSize, y * cellSize, cellSize);
       }
       if (grid[y][x] === PLAYER) {
+        image(pavingImg, x * cellSize, y * cellSize, cellSize);
         image(heroSprite,x* cellSize, y*cellSize,cellSize);
+      }
+      if (grid[y][x] === GOAL){
+        fill("red");
       }
     }
   }
