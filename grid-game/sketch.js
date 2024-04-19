@@ -2,7 +2,7 @@
 
 let grid;
 let cellSize;
-let GRID_SIZE = 27;
+let GRID_SIZE = 20;
 const PLAYER = 9;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
@@ -11,16 +11,14 @@ let player = {
   x: 0,
   y: 0,
 };
-let goal = {
-  x:, 
-  y:
-}
+
 let grassImg;
 let pavingImg;
 let bgMusic;
 let cantWalk;
 let heroSprite; 
 let state = "start screen";
+let level1;
 
 
 function preload() {
@@ -28,7 +26,9 @@ function preload() {
   pavingImg = loadImage("paving 3.png");
   bgMusic = loadSound("TownTheme.mp3");
   cantWalk = loadSound("lose music 3 - 1_0.wav");
-  heroSprite = loadImage("hero.png")
+  heroSprite = loadImage("hero.png");
+  level1 = loadJSON("1stLevel.JSON.json");
+
 }
 
 
@@ -49,7 +49,6 @@ function setup() {
 
   //add player to the grid
   grid[player.y][player.x] = PLAYER;
-  grid []
 }
 
 function windowResized() {
@@ -101,6 +100,9 @@ function keyPressed() {
   if (key === " " && state === "start screen"){
     state = "game";
     bgMusic.loop();
+  }
+  if (key === "1"){
+    grid = level1;
   }
 }
 
