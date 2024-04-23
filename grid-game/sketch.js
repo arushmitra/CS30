@@ -11,12 +11,16 @@ let player = {
   x: 0,
   y: 0,
 };
-
+let goal = {
+  x: 1,
+  y: 1,
+}
 let grassImg;
 let pavingImg;
 let bgMusic;
 let cantWalk;
 let heroSprite; 
+let blockToMove;
 let state = "start screen";
 let level1;
 
@@ -24,6 +28,7 @@ let level1;
 function preload() {
   grassImg = loadImage("clover 1.png");
   pavingImg = loadImage("paving 3.png");
+  blockToMove = loadImage("block.png");
   bgMusic = loadSound("TownTheme.mp3");
   cantWalk = loadSound("lose music 3 - 1_0.wav");
   heroSprite = loadImage("hero.png");
@@ -49,6 +54,8 @@ function setup() {
 
   //add player to the grid
   grid[player.y][player.x] = PLAYER;
+
+  grid[goal.y][goal.x] = GOAL;
 }
 
 function windowResized() {
@@ -167,7 +174,8 @@ function displayGrid() {
         image(heroSprite,x* cellSize, y*cellSize,cellSize);
       }
       if (grid[y][x] === GOAL){
-        fill("red");
+        image(pavingImg, x * cellSize, y * cellSize, cellSize);
+        image(blockToMove, x* cellSize,y*cellSize,cellSize);
       }
     }
   }

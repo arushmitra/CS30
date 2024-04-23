@@ -20,10 +20,10 @@ let state = "start screen";
 
 
 function preload() {
-  grassImg = loadImage("clover 1.png");
-  pavingImg = loadImage("paving 3.png");
-  bgMusic = loadSound("TownTheme.mp3");
-  cantWalk = loadSound("lose music 3 - 1_0.wav");
+  grassImg = loadImage("assets/images/clover 1.png");
+  pavingImg = loadImage("assets/images/paving 3.png");
+  bgMusic = loadSound("assets/sounds/TownTheme.mp3");
+  cantWalk = loadSound("assets/sounds/lose music 3 - 1_0.wav");
 }
 
 
