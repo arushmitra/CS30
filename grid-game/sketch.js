@@ -114,27 +114,44 @@ function keyPressed() {
 }
 
 function movePlayer(x, y) {
-  //don't move off the grid, and only move into open tiles
-  if (x < GRID_SIZE && y < GRID_SIZE &&
-      x >= 0 && y >= 0 && grid[y][x] === OPEN_TILE) {
-    //previous player location
-    let oldX = player.x;
-    let oldY = player.y;
+  // Don't move off the grid
+  if (x < GRID_SIZE && y < GRID_SIZE && x >= 0 && y >= 0) {
+    // If the target cell is an open tile or contains the block to move
+    if (grid[y][x] === OPEN_TILE || grid[y][x] === GOAL) {
+      // If the target cell contains the block to move
+      if (grid[y][x] === GOAL) {
+        // Calculate the next position of the block
+        let nextBlockX = x + (x - player.x);
+        let nextBlockY = y + (y - player.y);
 
-    //move the player
-    player.x = x;
-    player.y = y;
+        // Ensure the next position of the block is within the grid and is an open tile
+        if (nextBlockX >= 0 && nextBlockX < GRID_SIZE && nextBlockY >= 0 && nextBlockY < GRID_SIZE && grid[nextBlockY][nextBlockX] === OPEN_TILE) {
+          // Move the block
+          grid[nextBlockY][nextBlockX] = GOAL;
+          grid[y][x] = OPEN_TILE;
+        } else {
+          // If the block can't be moved, play sound or handle accordingly
+          cantWalk.loop(); 
+          return;
+        }
+      }
+      
 
-    //reset old location to be an empty tile
-    grid[oldY][oldX] = OPEN_TILE;
-
-    //move the player to the new spot
-    grid[player.y][player.x] = PLAYER;
-  }
-  else{
-    cantWalk.loop()
+      // Move the player
+      let oldX = player.x;
+      let oldY = player.y;
+      player.x = x;
+      player.y = y;
+      grid[oldY][oldX] = OPEN_TILE;
+      grid[player.y][player.x] = PLAYER;
+    } else {
+      // If the target cell is impassible, play sound or handle accordingly
+      cantWalk.loop(); 
+    }
   }
 }
+
+
 
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
