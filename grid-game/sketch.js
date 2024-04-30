@@ -4,6 +4,7 @@
 let grid;
 let cellSize;
 let GRID_SIZE = 20;
+//setting constants 
 const PLAYER = 9;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
@@ -11,6 +12,7 @@ const GOAL = 2;
 const FINISH = 3;
 const BLOCK = 4; 
 const FINISHLINE = 5; 
+
 // setting the positions 
 let player = {
   x: 0,
