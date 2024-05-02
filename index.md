@@ -9,7 +9,10 @@
 - [2D Grid](grid)
 - [Game Of Life](game-of-life)
 - [Character In A Grid](character-in-grid)
-
+- [Walker using OOP](walker)
+- [Walker OOP with arrays](walker-with-arrays)
+- [Fireworks OOP](fireworks)
+ 
 
 
 ## Projects 
