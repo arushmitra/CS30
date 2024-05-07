@@ -18,5 +18,6 @@
 ## Projects 
 - [Interactive Scene](scene)
 - [Arrays and Object Notation Assignment](blocks)
-- [Grid Based Game][grid-game]
+- [Grid Based Game](grid-game)
 - [2D Grid Game](game-grid)
+- [TEST - slitherio](major)
