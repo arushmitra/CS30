@@ -13,6 +13,7 @@
 - [Walker OOP with arrays](walker-with-arrays)
 - [Fireworks OOP](fireworks)
 - [Connected Nodes](nodes)
+- [Recursive Circles](recursive)
  
 
 ## Projects 
