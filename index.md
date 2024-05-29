@@ -14,6 +14,7 @@
 - [Fireworks OOP](fireworks)
 - [Connected Nodes](nodes)
 - [Recursive Circles](recursive)
+- [Sierpinski Triangle](triangle)
  
 
 ## Projects 
